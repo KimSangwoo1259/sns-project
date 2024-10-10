@@ -7,17 +7,20 @@ spring.jpa:
 
 spring.datasource:
   hikari.maximum-pool-size: 4
-  url:
-  username:
-  password:
+  url: jdbc:postgresql://c8m0261h0c7idk.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com/dfuek4eui7j9hc
+  username: u2h16ddc6abeil
+  password: p9d514cd671f0b038360db7711e191d1835fe382b361dbd8cdaab904825d0a790
   driver-class-name: org.postgresql.Driver
 
 spring:
   sql:
     init:
-      platform: postgre
+      platform: postgres
+  redis:
+    url: rediss://:p6606e96874a07abd7325d277af7c6c7b803593988b6853f53aee7472fffb8716@ec2-54-146-141-60.compute-1.amazonaws.com:29580
 
 jwt:
   secret-key: fast_campus.sns-application-2022.secret_key
   #30 days
   token.expired-time-ms: 2592000000
+

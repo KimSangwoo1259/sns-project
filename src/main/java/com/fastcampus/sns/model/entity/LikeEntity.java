@@ -1,6 +1,5 @@
 package com.fastcampus.sns.model.entity;
 
-import com.fastcampus.sns.model.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -13,26 +12,23 @@ import java.time.Instant;
 @Entity
 @Getter
 @Setter
-@Table(name = "\"post\"")
-@SQLDelete(sql = "UPDATED post SET deleted_at = NOW() where id=?")
+@Table(name = "\"like\"")
+@SQLDelete(sql = "UPDATED like SET deleted_at = NOW() where id=?")
 @Where(clause = "deleted_at is NULL")
-public class PostEntity {
+public class LikeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
-    @Column(name = "title")
-    private String title;
-
-    @Column(name = "body", columnDefinition = "TEXT")
-    private String body;
-
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="post_id")
+    private PostEntity post;
 
 
     @Column(name = "register_at")
@@ -55,11 +51,10 @@ public class PostEntity {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-    public static PostEntity of(String title, String body, UserEntity userEntity) {
-        PostEntity entity = new PostEntity();
-        entity.setTitle(title);
-        entity.setBody(body);
+    public static LikeEntity of(UserEntity userEntity, PostEntity postEntity) {
+        LikeEntity entity = new LikeEntity();
         entity.setUser(userEntity);
+        entity.setPost(postEntity);
 
 
         return entity;

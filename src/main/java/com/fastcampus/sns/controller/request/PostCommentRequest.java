@@ -1,15 +1,13 @@
 package com.fastcampus.sns.controller.request;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
-@Getter
 @NoArgsConstructor
-public class UserLoginRequest {
+public class PostCommentRequest {
 
-    private String userName;
-    private String password;
-
+    private String comment;
 }
